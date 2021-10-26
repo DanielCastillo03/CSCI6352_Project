@@ -9,6 +9,8 @@ import operator
 import math
 import numpy as np
 from collections import defaultdict
+
+
 dataset = []
 def loadDataset(filename):
     with open("my.dat" , 'rb') as f:
@@ -56,15 +58,17 @@ def nearestClass(neighbors):
 results=defaultdict(int)
 i=1
 
-for folder in os.listdir("/Volumes/external/School/Fall_2021/CSCI_6352/Projects/Project/songs"):
-    results[i]=folder
-    i+=1
+for folder in os.listdir("/Volumes/external/School/Fall_2021/CSCI_6352/Projects/CSCI6352_Project/song45"):
+    if not folder.startswith("."):
+        results[i]=folder
+        i+=1
 
-#hiphop
-(rate,sig)=wav.read("/Volumes/external/School/Fall_2021/CSCI_6352/Projects/Project/songs/pop/3rd Silhouette - Cold Hand (Copyright Free Music)-uQvSR9GeUww.wav")
-mfcc_feat=mfcc(sig,rate,winlen=0.020,appendEnergy=False)
+
+
+(rate,sig)=wav.read("/Volumes/external/School/Fall_2021/CSCI_6352/Projects/CSCI6352_Project/song45/pop/Andrew Applepie - Secrets (Free Vlog Music)-fRbXThOAnME.wav")
+mfcc_feat=mfcc(sig, appendEnergy=False, nfft=2400, winlen=0.045, samplerate= 44100)
 covariance = np.cov(np.matrix.transpose(mfcc_feat))
 mean_matrix = mfcc_feat.mean(0)
 feature=(mean_matrix,covariance,0)
-pred=nearestClass(getNeighbors(dataset ,feature , 5))
+pred =nearestClass(getNeighbors(dataset ,feature , 3))
 print(results[pred])
