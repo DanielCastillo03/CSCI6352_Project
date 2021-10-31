@@ -11,7 +11,7 @@ from pydub import AudioSegment
 
 
 #set paths for each directory for the different genres(insert yours here)
-folders = []
+folders = ["/Volumes/external/songs/folk"]
 
 for fd in folders:
     print(f"working in dir {fd}")
@@ -23,13 +23,13 @@ for fd in folders:
         fourty_five = 45 * 1000
         song = song[:fourty_five]
         #create a new directory to hold each shortened file and add it after the first '"'
-        song.export(f"{fol_name}/{file}", format="wav")
+        song.export(f"/Volumes/external/song45/{fol_name}/{file}", format="wav")
         #insert the same directory after the first '"'
-        audio_path_short = f"{fol_name}/{file}"
+        audio_path_short = f"/Volumes/external/song45/{fol_name}/{file}"
         x, sr = librosa.load(audio_path_short, sr= 44100)
         plt.figure(figsize=(14,5))
         plt.title(file)
         librosa.display.waveshow(x, sr = 44100)
         #insert the directory you want to save in here
-        plt.savefig(f"{fol_name}/{file}.png")
+        plt.savefig(f"/Volumes/external/raw_wav/{fol_name}/{file}.png")
 
