@@ -31,7 +31,7 @@ directory = "/Volumes/external/songs"
 #     #weird mac thing to filter out hidden files and directories. (may not need this on other OS)
 #     if not folder.startswith("."):
 #         for file in tqdm(os.listdir(directory+"/"+folder), desc= "songs", position= 0, leave= True):
-#             (rate,sig) = wav.read(directory+"/"+folder+"/"+file)
+#             (rate,sig) = wav.read(directory+"/"+foldirectory+"/"+folder+"/"+fileder+"/"+file)
 #             mfcc_feat = mfcc(sig,rate, appendEnergy = False, nfft= 2400, winlen = 0.045)
 #             covariance = np.cov(np.matrix.transpose(mfcc_feat))
 #             mean_matrix = mfcc_feat.mean(0)
