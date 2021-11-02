@@ -13,6 +13,8 @@ from sklearn.linear_model import LogisticRegression
 from sklearn.metrics import classification_report
 from collections import defaultdict
 from sklearn.model_selection import train_test_split
+from openpyxl import Workbook
+
 
 
 #########################################################################################################################
@@ -28,6 +30,9 @@ from tqdm import tqdm
 warnings.filterwarnings("ignore")
 main_directory = "/Volumes/external/song45"
 songlist = []
+# base = os.path.basename("/Volumes/external/School/Fall_2021/CSCI_6352/Projects/CSCI6352_Project/dataframe/country.xlsx")
+# print(os.path.splitext(base)[0])
+
 
 #########################################################################################################################
 #########################################################################################################################
@@ -128,8 +133,77 @@ x1=df[['m1','m2','m3','m4','m5','m6','m7','m8','m9','m10','m11','m12','m13']]
 Y = df[['target']]
 
 
-# save the data to a new directory
-df.to_csv("/Volumes/external/School/Fall_2021/CSCI_6352/Projects/CSCI6352_Project/dataframe/data.csv")
+# save the data to a new excel file
+df.to_excel("/Volumes/external/School/Fall_2021/CSCI_6352/Projects/CSCI6352_Project/dataframe/data.xlsx")
+
+
+#########################################################################################################################
+#########################################################################################################################
+
+# plotting all the data #################################################################################################
+
+#########################################################################################################################
+#########################################################################################################################
+
+
+#
+# # try and plot all the things
+# def PCA(exlfile):
+#     from sklearn.decomposition import PCA
+#     df = pd.read_excel(exlfile, index_col=0)
+#
+#     df_scaled  = pd.DataFrame()
+#
+#     for col in df.loc[:, "m1":"m13"]:
+#         df_scaled[col] = (df[col] - df[col].mean() / df[col].std())
+#
+#     df_scaled
+#
+#     pca = PCA(n_components = len(df_scaled.columns))
+#
+#     pca_series = pca.fit_transform(df_scaled).T
+#
+#     df_pca = pd.DataFrame({"PC1": pca_series[0], "PC2": pca_series[1]})
+#     base = os.path.basename(exlfile)
+#     tag = os.path.splitext(base)[0]
+#     df_pca.to_excel(f"/Volumes/external/School/Fall_2021/CSCI_6352/Projects/CSCI6352_Project/dataframe/DF_PCA_{tag}.xlsx")
+#
+#     explained_variance = pca.explained_variance_ratio_
+#
+#     print(f' \n explained variance = {explained_variance}')
+#
+#     eigenvector_loadings = pca.singular_values_
+#     print(f' \n eigenvector_loadings = {eigenvector_loadings}')
+#
+#
+# PCA("/Volumes/external/School/Fall_2021/CSCI_6352/Projects/CSCI6352_Project/dataframe/country.xlsx")
+# PCA("/Volumes/external/School/Fall_2021/CSCI_6352/Projects/CSCI6352_Project/dataframe/folk.xlsx")
+# PCA("/Volumes/external/School/Fall_2021/CSCI_6352/Projects/CSCI6352_Project/dataframe/hiphop.xlsx")
+# PCA("/Volumes/external/School/Fall_2021/CSCI_6352/Projects/CSCI6352_Project/dataframe/pop.xlsx")
+#
+# fig = plt.figure(figsize=(15,15))
+# ax = fig.add_subplot(111)
+#
+# ax.set_xlabel("First Principal Component", fontsize=15)
+# ax.set_ylabel("Second Principal Component", fontsize=15)
+# ax.set_title("Principal Components of both genres", fontsize=18)
+#
+# country_components = pd.read_excel("/Volumes/external/School/Fall_2021/CSCI_6352/Projects/CSCI6352_Project/dataframe/DF_PCA_country.xlsx", index_col=0)
+# folk_components = pd.read_excel("/Volumes/external/School/Fall_2021/CSCI_6352/Projects/CSCI6352_Project/dataframe/DF_PCA_folk.xlsx", index_col=0)
+# hiphop_components = pd.read_excel("/Volumes/external/School/Fall_2021/CSCI_6352/Projects/CSCI6352_Project/dataframe/DF_PCA_hiphop.xlsx", index_col=0)
+# pop_components = pd.read_excel("/Volumes/external/School/Fall_2021/CSCI_6352/Projects/CSCI6352_Project/dataframe/DF_PCA_pop.xlsx", index_col=0)
+#
+# ax = plt.scatter(x = country_components["PC1"], y= country_components["PC2"], label="country", color="darkcyan")
+# ax = plt.scatter(x = folk_components["PC1"][:1861], y= folk_components["PC2"][:1861], label="folk", color="crimson")
+# ax = plt.scatter(x = hiphop_components["PC1"][:1861], y= hiphop_components["PC2"][:1861], label="hiphop", color="black")
+# ax = plt.scatter(x = pop_components["PC1"][:1861], y= pop_components["PC2"][:1861], label="pop", color="yellow")
+#
+# plt.xlim(-250000,400000)
+#
+# plt.grid(True)
+# plt.legend(prop = {"size":18}, loc="upper right")
+# plt.savefig("/Volumes/external/School/Fall_2021/CSCI_6352/Projects/CSCI6352_Project/figures/PCAfig1.png")
+
 
 #########################################################################################################################
 #########################################################################################################################
